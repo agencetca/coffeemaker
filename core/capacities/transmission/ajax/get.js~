@@ -1,0 +1,27 @@
+Coffeemaker.core.capacities.transmission.ajax.GET = function (url,data,callback,async) {
+	
+	if (!async) async = true;
+
+	var xmlHttp = null;
+	xmlHttp = new XMLHttpRequest();
+	xmlHttp.open( "GET", Coffeemaker.config.root+"/"+url+"?data="+data, async );
+	xmlHttp.send( null );
+
+	xmlHttp.onerror = function () {
+	
+		Coffeemaker.core.capacities.log.network.fail('GET',xmlHttp.status,url)
+
+	}
+
+	xmlHttp.onreadystatechange=function(){
+		
+		if (xmlHttp.readyState === 4) {
+			if (xmlHttp.status==200) {
+		    	callback(xmlHttp.responseText);
+		    	Coffeemaker.core.capacities.log.network.success('GET',xmlHttp.status,url)
+			}else {
+				xmlHttp.onerror();
+			}
+		}
+	}
+}

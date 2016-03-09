@@ -1,0 +1,11 @@
+{
+
+    "structure" : {
+        "element" : "system::d",
+        "button" : {
+            "element" : "test/b"
+        }
+
+    }
+
+}

@@ -1,0 +1,305 @@
+{
+
+    "structure" : {
+
+        "element" : "div", 
+        "design" : "container",
+
+        "header" : {
+
+            "element" : "div",
+            "design" : "header",
+            "logo" : {
+                "element" : "div",
+                "design" : [ "headElem" , "h1" ]
+            },
+            "navi" : {
+                "element" : "div",
+                "design" : [ "headElem" , "h2" ]
+            },
+            "profil" : {
+                "element" : "div",
+                "design" : [ "headElem" , "h3" ]
+            }
+        },
+
+        "main" : {
+
+            "element" : "div",
+            "design" : "main",
+            "work" : {
+                "element" : "div",
+                "design" : "work",
+                "wo1" : {
+                    "element" : "div",
+                    "design" : "wo1"
+                },
+                "wo2" : {
+                    "element" : "div",
+                    "design" : "wo2"
+                },
+                "wo3" : {
+                    "element" : "div",
+                    "design" : "wo3"
+                }
+            },
+            "wip" : {
+                "element" : "div",
+                "design" : "wip",
+                "wip1" : {
+                    "element" : "div",
+                    "design" : "w1"
+                },
+                "wip2" : {
+                    "element" : "div",
+                    "design" : "w2"
+                },
+                "wip3" : {
+                    "element" : "div",
+                    "design" : "w3"
+                }
+            }
+        },
+
+        "footer" : {
+
+            "element" : "div",
+            "design" : "footer"
+        },
+
+        "panelL" : {
+        
+            "element" : "div",
+            "id" : "panelL",
+            "design" : [ "panel", "leftItem" ]
+        },
+        
+        "panelR" : {
+            "element" : "div",
+            "id" : "panelR",
+            "design" : [ "panel", "rightItem" ]
+        },
+
+        "sidebuttonL" : {
+            "element" : "div",
+            "design" : [ "side" , "L"],
+            "b1" : {
+                "element" : "div",
+                "design" : [ "b" , "l", "bl"]
+            },
+            "b2" : {
+                "element" : "div",
+                "design" : [ "B" , "l", "bl"],
+                "events" : {
+                    "click" : {
+                        "panel" : ["openL"]
+                    }
+                } 
+            },
+            "b3" : {
+                "element" : "div",
+                "design" : [ "b" , "l", "bl"]
+            },
+            "b4" : {
+                "element" : "div",
+                "design" : [ "b" , "l", "bl"]
+            },
+            "b5" : {
+                "element" : "div",
+                "design" : [ "b" , "l", "bl"]
+            }
+        },
+
+        "sidebuttonR" : {
+            "element" : "div",
+            "design" : [ "side" , "R"],
+            "b6" : {
+                "element" : "div",
+                "design" : [ "b" , "r", "br"]
+            },
+            "b7" : {
+                "element" : "div",
+                "design" : [ "B" , "r", "br"],
+                "events" : {
+                    "click" : {
+                        "panel" : ["openR"]
+                    }
+                } 
+            },
+            "b8" : {
+                "element" : "div",
+                "design" : [ "b" , "r", "br"]
+            },
+            "b9" : {
+                "element" : "div",
+                "design" : [ "b" , "r", "br"]
+            },
+            "b10" : {
+                "element" : "div",
+                "design" : [ "b" , "r", "br"]
+            }
+        }
+    },
+
+    "design" : {
+        "container" : {
+            "z-index" : "100",
+            "width" : "100%"
+        },
+        "header" : { 
+            "width" : "100%",
+            "height" : "12%"
+        },
+
+        "headElem" : {
+            "height" : "99%",
+            "padding" : "1%"
+        },
+        "h1" : {
+            "width" : "20%",
+            "background" : "#F9F9F9"
+        },
+        "h2" : {
+            "width" : "48%",
+            "background" : "#D4D4D4"
+        },
+        "h3" : {
+            "width" : "26%",
+            "background" : "#DEDEDE"
+        },
+
+        "main" : { 
+            "width" : "100%",
+            "height" : "83%",
+            "margin-top" : "2%"
+        },
+
+        "work" : { 
+            "width" : "69.4%",
+            "height" : "100%",
+            "margin-left" : "5.2%",
+            "margin-right" : "0.4%",
+            "background" : "#E5E5E5"
+        },
+
+        "wip" : { 
+            "width" : "19.8%",
+            "height" : "100%",
+            "margin-right" : "5.2%"
+        },
+
+        "w1" : {
+            "width" : "100%",
+            "height" : "200px",
+            "background-color" : "#F5F5F5"
+        },
+        "w2" : {
+            "width" : "100%",
+            "height" : "200px",
+            "background-color" : "#E1E1E1"
+        },
+        "w3" : {
+            "width" : "100%",
+            "height" : "auto"
+        },
+
+        "wo1" : {
+            "width" : "100%",
+            "height" : "100px",
+            "background-color" : "#EDEDED"
+        },
+        "wo2" : {
+            "width" : "100%",
+            "height" : "100px",
+            "background-color" : "#D1D1D1"
+        },
+        "wo3" : {
+            "width" : "100%",
+            "height" : "auto"
+        },
+
+        "footer" : { 
+            "position" : "fixed",
+            "bottom" : 0,
+            "left" : 0,
+            "width" : "100%",
+            "height" : "5%",
+            "background" : "black"
+        },
+
+        "panel" : {
+            "position" : "fixed",
+            "top" : "10%",
+            "width" : "300px",
+            "height" : "85%",
+            "background" : "#F1F1F1"
+        },
+
+        "side" : {
+            "position" : "fixed",
+            "top" : "10%",
+            "width" : "5%",
+            "height" : "85%",
+            "padding-top" : "7%"
+        },
+
+        "L" : {
+            "left" : "0"
+        },
+
+        "R" : {
+            "right" : "0"
+        },
+
+        "l" : {
+            "float" : "left"
+        },
+
+        "r" : {
+            "float" : "right"
+        },
+
+        "bl" : {
+            "border-radius" : "0 10px 10px 0"
+        },
+
+        "br" : {
+            "border-radius" : "10px 0 0 10px"
+        },
+
+        "leftItem" : {
+            "left" : "-300px"
+        },
+
+        "rightItem" : {
+            "right" : "-300px"
+        },
+
+        "B" : {
+            "width" : "70px",
+            "height" : "170px",
+            "margin-bottom" : "2px",
+            "background" : "black"
+        },
+
+        "b" : {
+            "width" : "70px",
+            "height" : "70px",
+            "margin-bottom" : "2px",
+            "background" : "black"
+        }
+    },
+
+    "logic" : {
+
+        "require" : ["css"],
+
+        "panel" : {
+
+            "openL" : {"css/affect" : ["panelL","left","0px"]},
+            "openR" : {"css/affect" : ["panelR","right","0px"]}
+        }
+
+    }
+}  
+

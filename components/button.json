@@ -1,0 +1,20 @@
+{
+
+    "structure" : {
+        "element" : "system::button",
+        "design" : "button"
+    },
+
+    "design" : {
+        "button" : {
+            "position" : "relative",
+            "cssFloat" : "left",
+            "width" : "100px",
+            "height" : "100px",
+            "cursor" : "pointer",
+            "background" : "gray"
+        }
+    }
+
+
+}

@@ -1,0 +1,7 @@
+Coffeemaker.core.system.method = function() {
+
+    var system = Coffeemaker.core.system;
+    var method = system.handle.make('methods',arguments,'action');
+    return method;
+    
+}

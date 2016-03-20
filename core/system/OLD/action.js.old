@@ -1,0 +1,63 @@
+Coffeemaker.core.system.action = function() {
+
+    var utils = Coffeemaker.core.utilities;
+    var fault = Coffeemaker.core.fault;
+    var system = Coffeemaker.core.system;
+    var load = Coffeemaker.core.load;
+
+    var args;
+    var callback;
+    var action;
+
+    var autoexec = true;
+
+    args = Array.prototype.slice.call(arguments);
+
+    if ( utils.check.isBool(args[args.length-1]) ) {
+        autoexec = args.pop();
+    }
+
+    if ( ! utils.check.isFunction(args[args.length-1]) ) {
+        fault.error.typeError('Invalid entry','The action builder asks for a callback at last argument');
+    }
+
+    var payload;
+
+    if ( utils.check.isArray(args[0]) ) {
+        methodname = args[0][0];
+        payload = args[0][1];
+    } else {
+        methodname = '';
+        payload = args[0];
+    }
+
+    if ( ! utils.check.isFunction( payload ) ) {
+        if ( utils.check.isString( payload ) ) {
+            payload = 'repo/action/'+payload;
+            if ( utils.check.isFalse(payload) ) {
+                fault.error.typeError('Invalid entry','The action builder asks for a function or function name at first argument');
+            }
+        } else {
+                fault.error.typeError('Invalid entry','The action builder asks for a function or function name at argument');
+        }
+    }
+
+    if (methodname) {
+        args[0] = [methodname,payload];
+    } else {
+        args[0] = payload;
+    }
+
+    callback = args.pop();
+
+        action =  system.build.apply('',args);
+        
+         if (autoexec === false) {
+            return function (a) {
+                action(callback,a);
+            }
+         } else {
+            action(callback);
+         }
+
+}

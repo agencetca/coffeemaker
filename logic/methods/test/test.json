@@ -1,0 +1,27 @@
+{
+
+
+    "personnalizedHello" : {
+
+        "name" : "Hello Dude",
+        "payload" : [
+            [ "test/askMyName" , "name" ],
+            [ "test/sayHello" , "name" ],
+            [ "test/setMyIdentity" , "name", "lastname", "age", "profession" ],
+            [ "test/displayIdentity" , "name", "lastname", "age", "profession", "info" ]
+        ]
+
+    },
+
+    "add2num" : {
+
+        "name" : "Add numbers",
+        "payload" : [
+            [ "test/addition", "&", 10 ]]
+
+
+    }
+
+
+
+}

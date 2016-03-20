@@ -1,0 +1,18 @@
+{
+
+    "." : {
+
+        "payload" : "component.json"
+
+    },
+    ".." : {
+
+        "test" : "process"
+
+    },
+    "!" : {
+
+    }
+
+
+}

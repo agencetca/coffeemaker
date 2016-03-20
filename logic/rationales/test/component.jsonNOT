@@ -1,0 +1,26 @@
+{
+
+    "giant" : {
+        "name" : "Giant Rationale test",
+        "payload" : [
+            [ "test/big" ]]
+    },
+
+    "supreme" : {
+        "name" : "Supreme Rationale test",
+        "payload" : [
+            [ "test/bigAction" ],
+            [{ 
+                "IF" : [{
+                         true : [ "test/isValid", "&" ]
+                     }],
+                "THEN" : [
+                    [ "test/personnalizedHello"]],
+                "ELSE" : [
+                    [ "test/sayNo" ],
+                    [ "test/interrupt"]]
+
+            }]
+        ]
+    }
+}

@@ -1,0 +1,119 @@
+Coffeemaker.core.system.method = function(path, args, cbk) {
+
+    var load = Coffeemaker.core.load;
+
+    load.invoke('repo/methods/'+path, function(method) {
+        
+        load.invoke('core/system', function(system) {
+
+            load.invoke('core/utilities', function(utils) {
+
+                
+                var loop = function (arr, callback, cbk) {
+                    var v = arr.length;
+
+                    if(v === 0) {
+                        cbk(arr)
+                    }
+
+                    for (var i = 0; i < v; i++) {
+                        callback(i,arr[i],arr);
+                        if ( i === v-1) {
+                            cbk(arr);
+                        }
+                    }
+                }
+
+                var func = {};
+
+                func.one = function (next){
+                    thing = 'secret';
+                    next(thing);
+                }
+
+                func.two = function (thing,next){
+                    result = thing;
+                    next(result);
+                }
+
+                func.three = function (thing,next){
+                    result = thing;
+                    next(result);
+                }
+
+                func.four = function (thing,next){
+                    result = thing;
+                    next(result);
+                }
+
+                func.five = function (thing,next){
+                    result = thing;
+                    next(result);
+                }
+
+                actions = [];
+                actions[0] = [ 'one' ];
+                actions[1] = [ 'two',['i am two'] ];
+                actions[2] = [ 'three',['i am three'] ];
+                actions[3] = [ 'four',['i am four'] ];
+                actions[4] = [ 'five',['i am five'] ];
+
+
+                var payload, callback, action;
+                loop(actions.reverse(), function(a,b,c){
+                    
+                    callback = callback || cbk;
+                    action = b.shift();
+                    payload = func[action].bind.apply(func[action], [null].concat(b.concat(callback)));
+                    callback = payload;
+
+                }, function() {
+                
+                    payload();
+
+                });
+
+
+
+                
+//                var payload, callback;
+//                utils.loop.array(method.payload.reverse(), function(a,b,c){
+//
+//                    callback = payload || cbk;
+//                    payload = function() {
+//                        load.action.call(null,b.shift(),b,function(value) {
+//                            //next(payload,value);
+//                            callback.call(null,value);
+//                            //alert(callback);
+//                        });
+//                    }
+//
+//
+//                }, function() {
+//                    payload();   
+//                });
+
+
+
+
+
+                
+//                var payload, callback;
+//                utils.loop.array(method.payload.reverse(), function(a,b,c){
+//                    
+//                    callback = callback || cbk;
+//                    payload = load.action.bind(null,b.shift(),b,callback);
+//                    callback = payload;
+//
+//                }, function() {
+//                
+//                    payload(args);
+//
+//                });
+            });
+
+        });
+        
+    });
+
+}

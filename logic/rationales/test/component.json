@@ -1,0 +1,43 @@
+{
+
+    "giant" : {
+        "name" : "Giant Rationale test",
+        "payload" : [
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ]]
+    },
+
+    "suprem" : {
+        "name" : "SUPREM Rationale test",
+        "payload" : [
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ],
+            [ "test/big" ]]
+    }
+
+}

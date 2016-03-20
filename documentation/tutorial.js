@@ -1,4 +1,0 @@
-Coffeemaker.documentation.tutorial = function () {
-
-
-}

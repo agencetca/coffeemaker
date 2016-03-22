@@ -104,13 +104,13 @@ a friendly robot that will propose you to start a coffeemaker project. </s>
 
 *Note : an action ALWAYS receive a function as last argument, it called next*
 
-*You musk keep in mind this : do not forget to include DB and next as first and last arguments
+*You musk keep in mind this : do not forget to include DB and next as first and last arguments*
 
-Optional arguments go on the middle
+*Optional arguments go on the middle*
 
-You also MUST launch next() when your action is done (otherwise the whole set stops
+*You also MUST launch next() when your action is done (otherwise the whole set stops*
 
-It is still unclear if you always need to send the DB as a next argument... you should do it for the moment.*
+*It is still unclear if you always need to send the DB as a next argument... you should do it for the moment.*
 
 Make a function following this pattern
 

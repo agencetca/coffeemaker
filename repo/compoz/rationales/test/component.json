@@ -1,0 +1,23 @@
+{
+
+    "giant" : {
+        "name" : "Giant Rationale test",
+        "payload" : [
+            [ "compoz/process/test/big" ],
+            [ "compoz/process/test/big" ],
+            [ "compoz/process/test/big" ],
+            [ "compoz/process/test/big" ],
+            [ "compoz/process/test/big" ]]
+    },
+
+    "suprem" : {
+        "name" : "SUPREM Rationale test",
+        "payload" : [
+            [ "compoz/process/test/big" ],
+            [ "compoz/process/test/big" ],
+            [ "compoz/process/test/big" ],
+            [ "compoz/process/test/big" ],
+            [ "compoz/process/test/big" ]]
+    }
+
+}

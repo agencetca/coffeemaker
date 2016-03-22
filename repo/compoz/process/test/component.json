@@ -1,0 +1,11 @@
+{
+    "big" : {
+
+        "name" : "Big Process test",
+        "payload" : [
+            [ "compoz/methods/test/personnalizedHello" ],
+            [ "compoz/methods/test/personnalizedHello" ],
+            [ "compoz/methods/test/personnalizedHello" ],
+            [ "compoz/methods/test/personnalizedHello" ]]
+    }
+}

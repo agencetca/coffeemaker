@@ -1,3 +1,6 @@
+<p><!DOCTYPE HTML>
+<meta charset="UTF-8"> </p>
+
 <h1>Coffeemaker.io</h1>
 
 <h2>Your personal platform kit</h2>
@@ -12,9 +15,9 @@ Currently, it's 100% owned by TCA, it is not publicly available, keep it at your
 
 <p>Today, is is hard to develop your own platform alone, since there 
 is a bunch of technical things to know before even thinking about 
-starting. However, a great a number of peoples have no IT skills, 
+starting. However, a great a number of peoples has no IT skills, 
 but ideas. Coffeemaker aims to facilitate them to transform that 
-into a real, working, efficient Web realization. On the side, the
+into a real, working, efficient Web realization. On a side, the
 reader should know that Coffeemaker is going with Paar (Platform 
 as a Robot), another piece of code coming from a larger concept that 
 make things "robot-ready". At this time, tough, Paar is not yet 
@@ -37,31 +40,334 @@ a friendly robot that will propose you to start a coffeemaker project. </s></p>
 <li>open your browser at the nginx listening port, you should see the user interface</li>
 </ul>
 
-<p><em>Note : You might be able to use the sources without a webserver (untested).</em></p>
+<p><em>Note : no interface at this time, just test-examples</em></p>
 </blockquote></p>
+
+<p><em>Note : You might be able to use the sources without a webserver (untested).</em></p>
 
 <h3>Filesystem</h3>
 
 <ul>
-<li>coffeemaker.js</li>
-<li>repo
+<li>coffeemaker.jsa : the core library</li>
+<li>core &lt;--- deprecated soon</li>
+<li>repo : the repository for sequences and actions
 <ul>
-<li>system
+<li>compoz : starting repo, given for free
 <ul>
-<li>actions</li>
-<li>methods</li>
-<li>process</li>
-<li>rationales</li>
+<li>actions : little functions that execute small things (should be KISS-based)</li>
+<li>methods : functions aggregation</li>
+<li>process : methods aggregation</li>
+<li>rationales : process aggregation</li>
 </ul></li>
-<li>your own repo</li>
+<li>your own repo : as it sounds, could be a compoz fork</li>
 </ul></li>
-<li>static
+<li>static : static files location
 <ul>
 <li>images</li>
-<li>lib
+<li>lib : external libraries that can not be handle by coffeemaker
 <ul>
 <li>jquery (example)</li>
 </ul></li>
+</ul></li>
+</ul>
+
+<h3>How it works</h3>
+
+<p>1) you load something, an action, a process, or method or whatever</p>
+
+<p>2) coffeemaker looks on the server side and tries to get a file called "require.json" </p>
+
+<p>3) if it get it, it parses it and download thing associated with</p>
+
+<p>4) then your request is transfered to the builder ("core/system")</p>
+
+<p>5) the builder loop on things that had been downloaded and compact them into a sequence</p>
+
+<p><em>Note : each entry in the sequence is an order for core/system/exec to execute an action</em></p>
+
+<p>6 ) the first action of the sequence is launched</p>
+
+<p>7) things do what you tell them to do</p>
+
+<h4>Make sequences</h4>
+
+<p><em>Note : at his time the system is nor flex nor strong, so follow carefully the instructions</em></p>
+
+<p>1) create a folder in /repo, this is YOUR repo</p>
+
+<p>2) create file like component.js or component.json (you are free for the name)</p>
+
+<p>3) configure the file (instructions are on next paragraphe)</p>
+
+<ul>
+<li>If it is component.JS it will be an  action</li>
+<li>If it is component.JSON it could be a method, process or rationale</li>
+</ul>
+
+<p>4) load your component. They ALWAYS need a callback at the end, even empty (sorry for that)</p>
+
+<p>5) it should work...</p>
+
+<h4>Make an action</h4>
+
+<p>1) Go in YOUR repo, create a file like "component.js"</p>
+
+<p>2) Edit the file like this:</p>
+
+<p><em>Note : an action ALWAYS receive an object as first argument, it is the "DB"</em></p>
+
+<p><em>Note : an action ALWAYS receive a function as last argument, it called next</em></p>
+
+<p>*You musk keep in mind this : do not forget to include DB and next as first and last arguments</p>
+
+<p>Optional arguments go on the middle</p>
+
+<p>You also MUST launch next() when your action is done (otherwise the whole set stops</p>
+
+<p>It is still unclear if you always need to send the DB as a next argument... you should do it for the moment.*</p>
+
+<p>Make a function following this pattern</p>
+
+<pre><code>    my function() {
+        this.action1 = function(db, thing, thing2, next)  {
+            //do awesome stuff
+            next(db)
+        };
+
+        this.action2 = function(db, next) {
+            //do awesome stuff
+            next(db)
+        }
+    }
+</code></pre>
+
+<p>Create a file require.json at the root of YOUR repo
+Edit it like :</p>
+
+<pre><code>    {
+        require : [
+            component.js 
+        ]
+
+    }
+</code></pre>
+
+<p>Launch it (see section further)</p>
+
+<h4>Make a method</h4>
+
+<p>1) Go in your repo, create a file like "component.json"</p>
+
+<p><em>Note you will need an action file. You can use component.js previously created or another lib like compoz/actions/someThing</em></p>
+
+<p>2) Edit the file like this:</p>
+
+<p><em>Note : args1 or args2 in the example below are NOT values. They are references to the attribute of an object that travels through all the actions in the set.</em></p>
+
+<p><em>Note : See the section "Launch a method" for more details</em></p>
+
+<pre><code>{
+
+    name : "name of the method",
+    payload : [
+
+        ["MyRepo/action1", "arg1, "arg2"],
+        [ "Compoz/actions/someThing", "args1" ],
+        [ "otherRepo/someThing" ]] 
+
+    ]
+
+}
+</code></pre>
+
+<p>Create a file require.json at the root of your repo</p>
+
+<p>Edit it like :</p>
+
+<pre><code>    {
+        require : [
+            component.jaons 
+        ]
+
+    }
+</code></pre>
+
+<p>Launch it (see section further)</p>
+
+<h4>Make a process</h4>
+
+<p>It is exactly the same as making a method but you aggregate methods</p>
+
+<h4>Make a method</h4>
+
+<p>It is exactly the same as making a method or process but you aggregate process</p>
+
+<h4>Launch an action</h4>
+
+<p>Go on your controller file (could be in index.html or a dedicated javascript script you import in the headers)</p>
+
+<p>Create an empty object, like : </p>
+
+<p><code>myObject = {};</code></p>
+
+<p>you might put arguments into the object, like : </p>
+
+<p><code>myObject.arg1 = 'myValue'</code>
+<code>myObject.arg2 = 'myValue2'</code></p>
+
+<p>And then you can give the object to the loader and load your action :</p>
+
+<pre><code>load.action('myRepo/myAction', myObject, ["arg1", "arg2"], function (a) {
+
+    //final code
+    console.log(a);
+
+}
+</code></pre>
+
+<p><em>Note : at the moment a argument array is required, even empty</em></p>
+
+<p><em>Note 2 : at the moment a callback is required, even doing nothing</em></p>
+
+<p><em>Note 3 : you receive an object in the callback, see "Concepts" and "Launch an action"</em></p>
+
+<h3>Launch a method</h3>
+
+<p><em>Note : Unlike "actions", "methods" don't accept arguments in the loader. If you try, it'll fail.</em></p>
+
+<p>Go on your controller file (could be in index.html or a dedicated javascript script you import in the headers)</p>
+
+<p>Create an empty object, like : </p>
+
+<p><code>myObject = {};</code></p>
+
+<p>you might put arguments into the object, like : </p>
+
+<p><code>myObject.arg1 = 'myValue'</code>
+<code>myObject.arg2 = 'myValue2'</code></p>
+
+<p>And then you can give the object to the loader and load your action :</p>
+
+<p><em>Note : Unlike "actions", "methods" don't accept arguments in the loader. If you try, it'll fail.</em></p>
+
+<pre><code>load.action('myRepo/myMethod', myObject, function (a) {
+
+    //final code
+    console.log(a);
+
+}
+</code></pre>
+
+<p><em>Note : at the moment a argument array is required, even empty</em></p>
+
+<p><em>Note 2 : at the moment a callback is required, even doing nothing</em></p>
+
+<p><em>Note 3 : you receive an object in the callback, see "Concepts" and "Launch an action"</em></p>
+
+<h4>Make a process</h4>
+
+<p>It is exactly the same idea as method
+    load.process('myRepo/myProcess....
+No arguments</p>
+
+<h4>Make a method</h4>
+
+<p>It is exactly the same idea as method and process
+    load.rationale('myRepo/myRat....
+No arguments</p>
+
+<h3>Concepts</h3>
+
+<p>DB : The object you gave to a loader. It will travel through all the actions/methods/process/rationales in a set. You get it as unique argument on your outgoing callback. If you dont give an object the system fails (currently no dummy object is created).</p>
+
+<p>next : is the following callback that has to be executed in a set of actions. It is an internal functionnality but you need to know it if you make actions (see "Make actions" for details)</p>
+
+<h3>API</h3>
+
+<blockquote>
+  <p><strong>window["Coffeemaker"]</strong></p>
+</blockquote>
+
+<ul>
+<li><p>config</p></li>
+<li><p>info</p></li>
+<li><p>documentation : loads the manual</p></li>
+<li><p>tutorial : not available at this point</p></li>
+<li><p>logs :</p>
+
+<ul>
+<li>network
+<ul>
+<li>success</li>
+<li>failures
++tasks</li>
+<li>queued</li>
+<li>success</li>
+<li>failures</li>
+<li>ETA : time for the current set of tasks to finish</li>
+<li>total : total tasks in the current set of tasks</li>
+</ul></li>
+</ul></li>
+<li><p>core : </p></li>
+<li><p>load : </p>
+
+<ul>
+<li>engine : used to set or get  nested attributes in the Coffeemaker window object </li>
+<li>handle : 
+<ul>
+<li>activity : simple counter that follows the requests and subrequests. It is used by transmitter to determine the moment it can launch the final callback (next)</li>
+<li>loaded : used by transmitter to keep track of already loaded packages (and avoir repeated ajax requests)</li>
+<li>transmitter : used the GET transmission to retrieve package. First it always look at require.json. Then it loops on the first array (required['.']) and download things that are listed (must be in the same folder)</li>
+</ul></li>
+<li>invoke : use engine to get things quickly like core methods but, soon, actions, methods (etc) and also HTML components</li>
+<li>action : load js files that contains vanilla javascript function that aim to do "the little as possible"</li>
+<li>method : load JSON files that contains sequences of actions that have to be executed in the right order</li>
+<li>process : load JSON files that contains sequences of methods that have to be executed in the right order</li>
+<li>rationale : load JSON files that contains sequences of process that have to be executed in the right order</li>
+</ul></li>
+<li><p>system : will be renamed as "build" at a point </p>
+
+<ul>
+<li>exec : function that currently execute all the actions, should execute everything else (todo)</li>
+<li>action  : use exec to build actions</li>
+<li>method : use exec and action to build methods</li>
+<li>process : use exec, action and method to build process</li>
+<li>rationale : use exec, action, method and process to build rationales</li>
+</ul></li>
+</ul>
+
+<blockquote>
+  <p><em>Side Note : load/methods,process,rationales and system/methods,process,rationales works exactly the same and should be merged asap</em></p>
+</blockquote>
+
+<ul>
+<li><p>transmission</p>
+
+<ul>
+<li>ajax
+<ul>
+<li>GET : GET requests launcher</li>
+</ul></li>
+</ul></li>
+<li><p>toolchain : JSON2HTML compilation system, is not workable in the current package, will be reimplemented asap</p></li>
+<li><p>ui : used by toolchain, incomplete and not used at this point</p></li>
+<li><p>storage : make objects in memory with setters and getters, but it is never used yet</p></li>
+<li><p>monitor : monitoring area</p>
+
+<ul>
+<li>log : 
+<ul>
+<li>exception : exception handler, sould be moved in fault at a point</li>
+<li>network : handle the transmission, currently GET</li>
+<li>task : task manager. Works, but the display of tasks is temporarily broken</li>
+</ul></li>
+</ul></li>
+<li><p>import : put script on HEAD, but will be deprecated soon</p></li>
+<li><p>fault : error and exception manager</p>
+
+<ul>
+<li>error : specific error manager
+typeError : only handled specific error at the time of writing</li>
 </ul></li>
 </ul>
 

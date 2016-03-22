@@ -1,7 +1,0 @@
-Coffeemaker.core.system.process = function() {
-
-    var system = Coffeemaker.core.system;
-    var process = system.handle.make('process',arguments,'method');
-    return process;
-
-}

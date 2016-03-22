@@ -1,0 +1,38 @@
+{
+
+
+    "helloWorld" : {
+
+        "name" : "Hello World",
+        "payload" : [
+            [ "compoz/actions/test/helloWorld", "out" ],
+            [ "compoz/actions/test/makeTextElement", "container" ],
+            [ "compoz/actions/test/displayString" , "out", "container" , "target" ]
+        ]
+
+    },
+
+    "personnalizedHello" : {
+
+        "name" : "Hello Dude",
+        "payload" : [
+            [ "compoz/actions/test/askMyName" , "name" ],
+            [ "compoz/actions/test/sayHello" , "name" ],
+            [ "compoz/actions/test/setMyIdentity" , "name", "lastname", "age", "profession" ],
+            [ "compoz/actions/test/displayIdentity" , "name", "lastname", "age", "profession", "info" ]
+        ]
+
+    },
+
+    "add2num" : {
+
+        "name" : "Add numbers",
+        "payload" : [
+            [ "compoz/actions/test/addition", "&", 10 ]]
+
+
+    }
+
+
+
+}

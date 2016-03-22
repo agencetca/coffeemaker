@@ -44,7 +44,7 @@ a friendly robot that will propose you to start a coffeemaker project. </s>
 
 ###Filesystem
 
-+ coffeemaker.jsa : the core library
++ coffeemaker.js : the core library
 + core <--- deprecated soon
 + repo : the repository for sequences and actions
     - compoz : starting repo, given for free
@@ -64,7 +64,7 @@ a friendly robot that will propose you to start a coffeemaker project. </s>
 
 2) coffeemaker looks on the server side and tries to get a file called "require.json" 
 
-3) if it get it, it parses it and download thing associated with
+3) if it get it, it parses it and downloads thing associated with
 
 4) then your request is transfered to the builder ("core/system")
 
@@ -90,6 +90,7 @@ a friendly robot that will propose you to start a coffeemaker project. </s>
 - If it is component.JSON it could be a method, process or rationale
 
 4) load your component. They ALWAYS need a callback at the end, even empty (sorry for that)
+*See next sections for more details on loading*
 
 5) it should work...
 

@@ -48,7 +48,7 @@ a friendly robot that will propose you to start a coffeemaker project. </s></p>
 <h3>Filesystem</h3>
 
 <ul>
-<li>coffeemaker.jsa : the core library</li>
+<li>coffeemaker.js : the core library</li>
 <li>core &lt;--- deprecated soon</li>
 <li>repo : the repository for sequences and actions
 <ul>
@@ -77,7 +77,7 @@ a friendly robot that will propose you to start a coffeemaker project. </s></p>
 
 <p>2) coffeemaker looks on the server side and tries to get a file called "require.json" </p>
 
-<p>3) if it get it, it parses it and download thing associated with</p>
+<p>3) if it get it, it parses it and downloads thing associated with</p>
 
 <p>4) then your request is transfered to the builder ("core/system")</p>
 
@@ -104,7 +104,8 @@ a friendly robot that will propose you to start a coffeemaker project. </s></p>
 <li>If it is component.JSON it could be a method, process or rationale</li>
 </ul>
 
-<p>4) load your component. They ALWAYS need a callback at the end, even empty (sorry for that)</p>
+<p>4) load your component. They ALWAYS need a callback at the end, even empty (sorry for that)
+<em>See next sections for more details on loading</em></p>
 
 <p>5) it should work...</p>
 
@@ -118,13 +119,13 @@ a friendly robot that will propose you to start a coffeemaker project. </s></p>
 
 <p><em>Note : an action ALWAYS receive a function as last argument, it called next</em></p>
 
-<p>*You musk keep in mind this : do not forget to include DB and next as first and last arguments</p>
+<p><em>Do not forget to include DB and next as first and last arguments</em></p>
 
-<p>Optional arguments go on the middle</p>
+<p><em>Optional arguments go on the middle</em></p>
 
-<p>You also MUST launch next() when your action is done (otherwise the whole set stops</p>
+<p><em>You also MUST launch next() when your action is done (otherwise the whole set stops</em></p>
 
-<p>It is still unclear if you always need to send the DB as a next argument... you should do it for the moment.*</p>
+<p><em>It is still unclear if you always need to send the DB as a next argument... you should do it for the moment.</em></p>
 
 <p>Make a function following this pattern</p>
 
@@ -198,7 +199,7 @@ Edit it like :</p>
 
 <p>It is exactly the same as making a method but you aggregate methods</p>
 
-<h4>Make a method</h4>
+<h4>Make a rationale</h4>
 
 <p>It is exactly the same as making a method or process but you aggregate process</p>
 
@@ -231,46 +232,21 @@ Edit it like :</p>
 
 <p><em>Note 3 : you receive an object in the callback, see "Concepts" and "Launch an action"</em></p>
 
-<h3>Launch a method</h3>
+<h4>Launch a method</h4>
 
 <p><em>Note : Unlike "actions", "methods" don't accept arguments in the loader. If you try, it'll fail.</em></p>
 
-<p>Go on your controller file (could be in index.html or a dedicated javascript script you import in the headers)</p>
+<p>It is exactly the same idea as action
+    load.process('myRepo/myMethod....
+No arguments</p>
 
-<p>Create an empty object, like : </p>
-
-<p><code>myObject = {};</code></p>
-
-<p>you might put arguments into the object, like : </p>
-
-<p><code>myObject.arg1 = 'myValue'</code>
-<code>myObject.arg2 = 'myValue2'</code></p>
-
-<p>And then you can give the object to the loader and load your action :</p>
-
-<p><em>Note : Unlike "actions", "methods" don't accept arguments in the loader. If you try, it'll fail.</em></p>
-
-<pre><code>load.action('myRepo/myMethod', myObject, function (a) {
-
-    //final code
-    console.log(a);
-
-}
-</code></pre>
-
-<p><em>Note : at the moment a argument array is required, even empty</em></p>
-
-<p><em>Note 2 : at the moment a callback is required, even doing nothing</em></p>
-
-<p><em>Note 3 : you receive an object in the callback, see "Concepts" and "Launch an action"</em></p>
-
-<h4>Make a process</h4>
+<h4>Launch a process</h4>
 
 <p>It is exactly the same idea as method
     load.process('myRepo/myProcess....
 No arguments</p>
 
-<h4>Make a method</h4>
+<h4>Launch a rationale</h4>
 
 <p>It is exactly the same idea as method and process
     load.rationale('myRepo/myRat....
@@ -278,14 +254,16 @@ No arguments</p>
 
 <h3>Concepts</h3>
 
-<p>DB : The object you gave to a loader. It will travel through all the actions/methods/process/rationales in a set. You get it as unique argument on your outgoing callback. If you dont give an object the system fails (currently no dummy object is created).</p>
+<p><strong>DB</strong> : The object you gave to a loader. It will travel through all the actions/methods/process/rationales in a set. You get it as unique argument on your outgoing callback. If you dont give an object the system fails (currently no dummy object is created).</p>
 
-<p>next : is the following callback that has to be executed in a set of actions. It is an internal functionnality but you need to know it if you make actions (see "Make actions" for details)</p>
+<p><strong>next</strong> : is the following callback that has to be executed in a set of actions. It is an internal functionnality but you need to know it if you make actions (see "Make actions" for details)</p>
 
 <h3>API</h3>
 
 <blockquote>
   <p><strong>window["Coffeemaker"]</strong></p>
+
+<p><em>Side Note : load/methods,process,rationales and system/methods,process,rationales works exactly the same and should be merged asap</em></p>
 </blockquote>
 
 <ul>
@@ -299,8 +277,10 @@ No arguments</p>
 <li>network
 <ul>
 <li>success</li>
-<li>failures
-+tasks</li>
+<li>failures</li>
+</ul></li>
+<li>tasks
+<ul>
 <li>queued</li>
 <li>success</li>
 <li>failures</li>
@@ -308,7 +288,9 @@ No arguments</p>
 <li>total : total tasks in the current set of tasks</li>
 </ul></li>
 </ul></li>
-<li><p>core : </p></li>
+<li><p>core : </p>
+
+<ul>
 <li><p>load : </p>
 
 <ul>
@@ -334,13 +316,6 @@ No arguments</p>
 <li>process : use exec, action and method to build process</li>
 <li>rationale : use exec, action, method and process to build rationales</li>
 </ul></li>
-</ul>
-
-<blockquote>
-  <p><em>Side Note : load/methods,process,rationales and system/methods,process,rationales works exactly the same and should be merged asap</em></p>
-</blockquote>
-
-<ul>
 <li><p>transmission</p>
 
 <ul>
@@ -367,7 +342,10 @@ No arguments</p>
 
 <ul>
 <li>error : specific error manager
-typeError : only handled specific error at the time of writing</li>
+<ul>
+<li>typeError : only handled specific error at the time of writing</li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 

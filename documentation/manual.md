@@ -104,7 +104,7 @@ a friendly robot that will propose you to start a coffeemaker project. </s>
 
 *Note : an action ALWAYS receive a function as last argument, it called next*
 
-*You musk keep in mind this : do not forget to include DB and next as first and last arguments*
+*Do not forget to include DB and next as first and last arguments*
 
 *Optional arguments go on the middle*
 
@@ -181,7 +181,7 @@ Launch it (see section further)
 ####Make a process
 It is exactly the same as making a method but you aggregate methods
 
-####Make a method
+####Make a rationale
 It is exactly the same as making a method or process but you aggregate process
 
 ####Launch an action
@@ -211,46 +211,20 @@ And then you can give the object to the loader and load your action :
 
 *Note 3 : you receive an object in the callback, see "Concepts" and "Launch an action"*
 
-###Launch a method
+####Launch a method
 
 *Note : Unlike "actions", "methods" don't accept arguments in the loader. If you try, it'll fail.*
 
-Go on your controller file (could be in index.html or a dedicated javascript script you import in the headers)
+It is exactly the same idea as action
+    load.process('myRepo/myMethod....
+No arguments
 
-Create an empty object, like : 
-
-`myObject = {};`
-
-you might put arguments into the object, like : 
-
-`myObject.arg1 = 'myValue'`
-`myObject.arg2 = 'myValue2'`
-
-And then you can give the object to the loader and load your action :
-
-*Note : Unlike "actions", "methods" don't accept arguments in the loader. If you try, it'll fail.*
-
-    load.action('myRepo/myMethod', myObject, function (a) {
-
-        //final code
-        console.log(a);
-
-    }
-
-*Note : at the moment a argument array is required, even empty*
-
-*Note 2 : at the moment a callback is required, even doing nothing*
-
-*Note 3 : you receive an object in the callback, see "Concepts" and "Launch an action"*
-
-    
-
-####Make a process
+####Launch a process
 It is exactly the same idea as method
     load.process('myRepo/myProcess....
 No arguments
 
-####Make a method
+####Launch a rationale
 It is exactly the same idea as method and process
     load.rationale('myRepo/myRat....
 No arguments
@@ -258,15 +232,20 @@ No arguments
 
 ###Concepts
 
-DB : The object you gave to a loader. It will travel through all the actions/methods/process/rationales in a set. You get it as unique argument on your outgoing callback. If you dont give an object the system fails (currently no dummy object is created).
+__DB__ : The object you gave to a loader. It will travel through all the actions/methods/process/rationales in a set. You get it as unique argument on your outgoing callback. If you dont give an object the system fails (currently no dummy object is created).
 
-next : is the following callback that has to be executed in a set of actions. It is an internal functionnality but you need to know it if you make actions (see "Make actions" for details)
+__next__ : is the following callback that has to be executed in a set of actions. It is an internal functionnality but you need to know it if you make actions (see "Make actions" for details)
 
 
 ###API
 
 > __window["Coffeemaker"]__
 >
+
+
+> *Side Note : load/methods,process,rationales and system/methods,process,rationales works exactly the same and should be merged asap*
+>
+
 
 + config
 
@@ -280,7 +259,7 @@ next : is the following callback that has to be executed in a set of actions. It
     + network
         + success
         + failures
-    +tasks
+    + tasks
         + queued
         + success
         + failures
@@ -288,49 +267,46 @@ next : is the following callback that has to be executed in a set of actions. It
         + total : total tasks in the current set of tasks
 + core : 
 
-+ load : 
-    + engine : used to set or get  nested attributes in the Coffeemaker window object 
-    + handle : 
-        + activity : simple counter that follows the requests and subrequests. It is used by transmitter to determine the moment it can launch the final callback (next)
-        + loaded : used by transmitter to keep track of already loaded packages (and avoir repeated ajax requests)
-        + transmitter : used the GET transmission to retrieve package. First it always look at require.json. Then it loops on the first array (required['.']) and download things that are listed (must be in the same folder)
-    + invoke : use engine to get things quickly like core methods but, soon, actions, methods (etc) and also HTML components
-    + action : load js files that contains vanilla javascript function that aim to do "the little as possible"
-    + method : load JSON files that contains sequences of actions that have to be executed in the right order
-    + process : load JSON files that contains sequences of methods that have to be executed in the right order
-    + rationale : load JSON files that contains sequences of process that have to be executed in the right order
+    + load : 
+        + engine : used to set or get  nested attributes in the Coffeemaker window object 
+        + handle : 
+            + activity : simple counter that follows the requests and subrequests. It is used by transmitter to determine the moment it can launch the final callback (next)
+            + loaded : used by transmitter to keep track of already loaded packages (and avoir repeated ajax requests)
+            + transmitter : used the GET transmission to retrieve package. First it always look at require.json. Then it loops on the first array (required['.']) and download things that are listed (must be in the same folder)
+        + invoke : use engine to get things quickly like core methods but, soon, actions, methods (etc) and also HTML components
+        + action : load js files that contains vanilla javascript function that aim to do "the little as possible"
+        + method : load JSON files that contains sequences of actions that have to be executed in the right order
+        + process : load JSON files that contains sequences of methods that have to be executed in the right order
+        + rationale : load JSON files that contains sequences of process that have to be executed in the right order
 
-+ system : will be renamed as "build" at a point 
-    + exec : function that currently execute all the actions, should execute everything else (todo)
-    + action  : use exec to build actions
-    + method : use exec and action to build methods
-    + process : use exec, action and method to build process
-    + rationale : use exec, action, method and process to build rationales
+    + system : will be renamed as "build" at a point 
+        + exec : function that currently execute all the actions, should execute everything else (todo)
+        + action  : use exec to build actions
+        + method : use exec and action to build methods
+        + process : use exec, action and method to build process
+        + rationale : use exec, action, method and process to build rationales
 
-> *Side Note : load/methods,process,rationales and system/methods,process,rationales works exactly the same and should be merged asap*
->
+    + transmission
+        + ajax
+            + GET : GET requests launcher
 
-+ transmission
-    + ajax
-        + GET : GET requests launcher
+    + toolchain : JSON2HTML compilation system, is not workable in the current package, will be reimplemented asap
 
-+ toolchain : JSON2HTML compilation system, is not workable in the current package, will be reimplemented asap
+    + ui : used by toolchain, incomplete and not used at this point
 
-+ ui : used by toolchain, incomplete and not used at this point
+    + storage : make objects in memory with setters and getters, but it is never used yet
 
-+ storage : make objects in memory with setters and getters, but it is never used yet
+    + monitor : monitoring area
+        + log : 
+            + exception : exception handler, sould be moved in fault at a point
+            + network : handle the transmission, currently GET
+            + task : task manager. Works, but the display of tasks is temporarily broken
 
-+ monitor : monitoring area
-    + log : 
-        + exception : exception handler, sould be moved in fault at a point
-        + network : handle the transmission, currently GET
-        + task : task manager. Works, but the display of tasks is temporarily broken
+    + import : put script on HEAD, but will be deprecated soon
 
-+ import : put script on HEAD, but will be deprecated soon
-
-+ fault : error and exception manager
-    + error : specific error manager
-        typeError : only handled specific error at the time of writing
+    + fault : error and exception manager
+        + error : specific error manager
+            + typeError : only handled specific error at the time of writing
 
 ###UML
 

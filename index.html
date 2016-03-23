@@ -20,9 +20,12 @@ window.onload = function() {
     var o = {}
     o.target = document.body;
 
-    load.method('compoz/methods/test/personnalizedHello', [ o ], function(a) {
+    load.method('compoz/methods/test/personnalizedHello', [ o, 'name' ], function(a) {
         
-        load.method('compoz/methods/test/sayHello', [ o , 'name' ], function(a) {
+        a.message = "Hello "+a.name+" !";
+        load.action('compoz/actions/test/makeTextElement', [ o, 'container' ], function(a) {
+            load.action('compoz/actions/test/displayString', [ o , 'message', 'container', 'target' ], function(a) {
+            });
         });
     });
 

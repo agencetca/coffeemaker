@@ -21,7 +21,8 @@ window.onload = function() {
     o.target = document.body;
 
     load.method('compoz/methods/test/personnalizedHello', [ o ], function(a) {
-        load.method('compoz/methods/test/helloWorld', [ o ], function(a) {
+        
+        load.method('compoz/methods/test/sayHello', [ o , 'name' ], function(a) {
         });
     });
 

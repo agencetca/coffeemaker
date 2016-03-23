@@ -218,7 +218,7 @@ Edit it like :</p>
 
 <p>And then you can give the object to the loader and load your action :</p>
 
-<pre><code>load.action('myRepo/myAction', myObject, ["arg1", "arg2"], function (a) {
+<pre><code>load.action('myRepo/myAction', [ myObject, "arg1", "arg2"], function (a) {
 
     //final code
     console.log(a);
@@ -226,31 +226,35 @@ Edit it like :</p>
 }
 </code></pre>
 
-<p><em>Note : at the moment a argument array is required, even empty</em></p>
+<p><em>Note : at the moment an argument array with an object as first argument is required, even empty</em></p>
 
 <p><em>Note 2 : at the moment a callback is required, even doing nothing</em></p>
 
-<p><em>Note 3 : you receive an object in the callback, see "Concepts" and "Launch an action"</em></p>
+<p><em>Note 3 : at the moment the callback is OUTSIDE the argument array. Yes, it sucks a bit, the whole need of an array should be removed in next version</em></p>
+
+<p><em>Note 4 : you receive an object in the callback, see "Concepts" and "Launch an action"</em></p>
 
 <h4>Launch a method</h4>
 
-<p><em>Note : Unlike "actions", "methods" don't accept arguments in the loader. If you try, it'll fail.</em></p>
+<p><em>Note : Unlike "actions", "methods" don't accept arguments in the loader. If you try, you'll see that arguments are just ignored.</em></p>
+
+<p><em>Note 2 : You NEED nevertheless to give an array with object as first argument, like in the action launching case above</em></p>
 
 <p>It is exactly the same idea as action
-    load.process('myRepo/myMethod....
-No arguments</p>
+    load.process('myRepo/myMethod, [ myObject ]....
+No arguments are taken into account</p>
 
 <h4>Launch a process</h4>
 
 <p>It is exactly the same idea as method
-    load.process('myRepo/myProcess....
-No arguments</p>
+    load.process('myRepo/myProcess, [ myObject ]....
+No arguments are taken into account</p>
 
 <h4>Launch a rationale</h4>
 
 <p>It is exactly the same idea as method and process
-    load.rationale('myRepo/myRat....
-No arguments</p>
+    load.rationale('myRepo/myRat, [ myObject ]....
+No arguments are taken into account</p>
 
 <h3>Concepts</h3>
 

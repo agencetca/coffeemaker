@@ -198,37 +198,40 @@ you might put arguments into the object, like :
 
 And then you can give the object to the loader and load your action :
 
-    load.action('myRepo/myAction', myObject, ["arg1", "arg2"], function (a) {
+    load.action('myRepo/myAction', [ myObject, "arg1", "arg2"], function (a) {
 
         //final code
         console.log(a);
 
     }
 
-*Note : at the moment a argument array is required, even empty*
+*Note : at the moment an argument array with an object as first argument is required, even empty*
 
 *Note 2 : at the moment a callback is required, even doing nothing*
 
-*Note 3 : you receive an object in the callback, see "Concepts" and "Launch an action"*
+*Note 3 : at the moment the callback is OUTSIDE the argument array. Yes, it sucks a bit, the whole need of an array should be removed in next version*
+
+*Note 4 : you receive an object in the callback, see "Concepts" and "Launch an action"*
 
 ####Launch a method
 
-*Note : Unlike "actions", "methods" don't accept arguments in the loader. If you try, it'll fail.*
+*Note : Unlike "actions", "methods" don't accept arguments in the loader. If you try, you'll see that arguments are just ignored.*
+
+*Note 2 : You NEED nevertheless to give an array with object as first argument, like in the action launching case above*
 
 It is exactly the same idea as action
-    load.process('myRepo/myMethod....
-No arguments
+    load.process('myRepo/myMethod, [ myObject ]....
+No arguments are taken into account
 
 ####Launch a process
 It is exactly the same idea as method
-    load.process('myRepo/myProcess....
-No arguments
+    load.process('myRepo/myProcess, [ myObject ]....
+No arguments are taken into account
 
 ####Launch a rationale
 It is exactly the same idea as method and process
-    load.rationale('myRepo/myRat....
-No arguments
-
+    load.rationale('myRepo/myRat, [ myObject ]....
+No arguments are taken into account
 
 ###Concepts
 

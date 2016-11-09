@@ -1,0 +1,23 @@
+{
+
+    "structure" : {
+
+        "element" : "system::div",
+        "design" : "div"
+
+    },
+
+    "design" : {
+
+        "div" : {
+            "position" : "relative",
+            "float" : "left",
+            "width" : "auto",
+            "height" : "auto",
+            "margin" : 0,
+            "padding" : 0
+        }
+
+    }
+
+}

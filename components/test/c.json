@@ -1,0 +1,11 @@
+{
+
+    "structure" : {
+        "element" : "test/d",
+        "button" : {
+            "element" : "test/e"
+        }
+
+    }
+
+}

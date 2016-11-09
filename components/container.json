@@ -1,0 +1,17 @@
+{
+
+    "structure" : {
+        "element" : "div",
+        "design" : "container"
+    },
+
+    "design" : {
+        "container" : {
+            "position" : "relative",
+            "cssFloat" : "left",
+            "width" : "auto",
+            "height" : "auto"
+        }
+    }
+
+}

@@ -1,0 +1,98 @@
+Coffeemaker.core.capacities.toolchain.make = function(thing) {
+		
+	    var load = Coffeemaker.core.capacities.load;
+		var check = load('core/capacities/check');
+		var unix = load('core/capacities/unix');
+		var compile = load('core/capacities/compile');
+		var repo = load('components');
+		
+		//TODO
+		//var loop = load('loop');
+		
+		if ( check.isHTML(thing) ) { 
+		
+		    console.log("make already obj!")
+		    return thing;
+		
+		} else if ( check.isString(thing) ) {
+		        console.log("make string");
+		        //if( ! thing.match(/^system::/) && check.objectSize(repo[thing]) !== 0) {
+		        if( ! thing.match(/^system::/)) {
+		        	thing = compile(repo[thing])[0];
+		        }else{
+		            thing =  document.createElement(thing.replace(/^system::/,''));
+		        }
+		} else if ( check.isFunction(thing) ) {
+		        console.log("make func!")
+		        thing = thing();
+		        if ( check.isNotHTML(thing) ) { 
+		            thing = null;
+		        }
+		
+		} else if ( check.isNotHTML(thing) && check.isObject(thing.structure) ) {
+		
+		    thing = thing.structure;
+		    console.log("make obj!")
+		    base  = [];
+		
+		     var loop = function(o,callback,recursive) {
+		         if(!o) return;
+		         for(var i in o) {
+		             if(o.hasOwnProperty(i)) {
+		                 if(callback) {
+		                     callback(i,o[i],o);
+		                 };
+		                 if(typeof o[i] === 'object') {
+		                     if(recursive === true){
+		                         loop(o[i],callback,true);
+		                     };
+		                 };
+		             };
+		         };
+		     };
+		
+		    loop(thing,function(k,v,b) {
+		                
+		                if(typeof v === 'object' && v.element) {
+		                    
+		                   //v.name = base.element.path+'/'+k;
+		                   v.element = this.make(v.element);
+		                   alert(this.make);
+		                   //v.element.path = v.name;
+		                   //record(v.element);
+		                   
+		                   var parse = function(v,ref){
+		                     loop(v,function(x,y){
+		                         if(typeof y === 'object' && y.element) {
+		                             
+		                             //y.name = v.name+'/'+x;
+		                             y.element = this.make(y.element);
+		                             //y.element = document.createElement('div');
+		                             //y.element.path = y.name;
+		                             //record(y.element);
+		                             
+		                             //configure(y);
+		                             
+		                             v.element.appendChild(y.element);
+		                             //if(ref) ref.appendChild(y.element);
+		                             parse(y);
+		                             
+		                         };
+		                     }.bind(this));
+		                    }.bind(this);
+		                    
+		                    //configure(v);
+		                    //base.appendChild(v.element);
+		                    base.push(v.element);
+		                    parse(v);
+		                };
+		                
+		            }.bind(this));
+		
+		    thing = base;
+		
+		}
+
+        return thing;
+	
+	}
